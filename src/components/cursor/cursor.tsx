@@ -159,9 +159,9 @@ function ElasticCursor() {
         duration: 1.5,
         ease: "elastic.out(1, 0.5)",
         onUpdate: () => {
-          // @ts-ignore
+          // @ts-expect-error
           vel.x = (x - pos.x) * 1.2;
-          // @ts-ignore
+          // @ts-expect-error
           vel.y = (y - pos.y) * 1.2;
         },
       });
