@@ -2,7 +2,7 @@
 import styles from "./style.module.scss";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { opacity, slideUp } from "./anim";
+import { opacity} from "./anim";
 import { usePreloader } from ".";
 import { Variants } from "framer-motion";
 
@@ -20,7 +20,7 @@ const steps = [
 ];
 
 export default function Index() {
-  const { isLoading, loadingPercent } = usePreloader();
+  const { loadingPercent } = usePreloader();
   const [index, setIndex] = useState(0);
   const [dimension, setDimension] = useState({ width: 0, height: 0 });
 
