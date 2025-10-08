@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ElasticCursor from "@/components/cursor/cursor";
-import Preloader from "@/components/preloader";
-import { TooltipProvider } from "@/components/global/tooltip";
-import { config } from "@/data/config"
+import { config } from "@/data/config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,8 +32,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Preloader><TooltipProvider>{children}</TooltipProvider><ElasticCursor /></Preloader>
-        
+        {children}
+        <ElasticCursor />
       </body>
     </html>
   );

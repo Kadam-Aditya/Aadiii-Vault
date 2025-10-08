@@ -10,7 +10,6 @@ import React, {
 import { gsap } from "gsap";
 import { cn } from "@/lib/utils";
 import { useMouse } from "@/hooks/use-mouse";
-import { usePreloader } from "../preloader";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 // Gsap Ticker Hook
@@ -53,9 +52,7 @@ function getRekt(el: HTMLElement) {
 const CURSOR_DIAMETER = 50;
 
 function ElasticCursor() {
-  const { loadingPercent, isLoading } = usePreloader();
   const isMobile = useMediaQuery("(max-width: 768px)");
-
   const jellyRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
   const [cursorMoved, setCursorMoved] = useState(false);
@@ -79,9 +76,9 @@ function ElasticCursor() {
     set.x = gsap.quickSetter(jellyRef.current, "x", "px");
     set.y = gsap.quickSetter(jellyRef.current, "y", "px");
     set.r = gsap.quickSetter(jellyRef.current, "rotate", "deg");
+    set.width = gsap.quickSetter(jellyRef.current, "width", "px");
     set.sx = gsap.quickSetter(jellyRef.current, "scaleX");
     set.sy = gsap.quickSetter(jellyRef.current, "scaleY");
-    set.width = gsap.quickSetter(jellyRef.current, "width", "px");
   }, [jellyRef, set]);
 
   // Animation loop
@@ -90,7 +87,7 @@ function ElasticCursor() {
     const rotation = getAngle(vel.x, vel.y);
     const scale = getScale(vel.x, vel.y);
 
-    if (!isHovering && !isLoading) {
+    if (!isHovering) {
       set.x(pos.x);
       set.y(pos.y);
       set.width(50 + scale * 300);
@@ -100,7 +97,7 @@ function ElasticCursor() {
     } else {
       set.r(0);
     }
-  }, [set, pos, vel, isHovering, isLoading]);
+  }, [set, pos, vel, isHovering]);
 
   // Mouse movement handling
   useLayoutEffect(() => {
@@ -151,20 +148,12 @@ function ElasticCursor() {
       loop();
     };
 
-    if (!isLoading) window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [isLoading, cursorMoved, isMobile, loop, pos, vel]);
-
-  // Preloader width animation
-  useEffect(() => {
-    if (!jellyRef.current) return;
-    jellyRef.current.style.height = "2rem";
-    jellyRef.current.style.borderRadius = "1rem";
-    jellyRef.current.style.width = `${loadingPercent * 2}vw`;
-  }, [loadingPercent]);
+  }, [cursorMoved, isMobile, loop, pos, vel]);
 
   // Start GSAP ticker
-  useTicker(loop, isLoading || !cursorMoved || isMobile);
+  useTicker(loop, !cursorMoved || isMobile);
 
   if (isMobile) return null;
 

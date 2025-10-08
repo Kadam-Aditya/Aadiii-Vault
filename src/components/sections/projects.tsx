@@ -2,7 +2,7 @@ import React from 'react'
 
 const ProjectsSection = () => {
   return (
-    <div>projects</div>
+    <div></div>
   )
 }
 
