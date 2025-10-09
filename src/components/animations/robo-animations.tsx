@@ -69,7 +69,7 @@ export default function SimpleSpline() {
   const [error, setError] = useState<string | null>(null);
   const isMobile = useIsMobile();
 
-  const scenePath = isMobile ? "/assets/T2.spline" : "/assets/Test1.spline";
+  const scenePath = isMobile ? "/assets/T3.spline" : "/assets/Test1.spline";
 
   return (
     <div style={{ width: "100%", height: "100vh", position: "relative" }}>
