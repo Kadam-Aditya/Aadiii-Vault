@@ -30,7 +30,7 @@ const config = {
     site: "https://adityakadam.com",
   
     get ogImg() {
-      return this.site + "/assets/fevicon.png";
+      return this.site + "/assets/Fevicon.png";
     },
     social: {
       twitter: "",

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: config.title,
   description: config.description.long,
   icons: {
-    icon: "/favicon.ico",
+    icon: "/assets/fevicon.png"
   },
 };
 

@@ -10,14 +10,14 @@ import SimpleSpline from "@/components/animations/robo-animations";
 function MainPage() {
   return (
     <>
-        <main className={cn("bg-slate-100 dark:bg-transparent")}>
+      <main className={cn("bg-slate-100 dark:bg-transparent")}>
         <div className="top-0 z-0 fixed w-full h-screen">
-            <SimpleSpline />
-          </div>
-          <SkillsSection />
-          <ProjectsSection />
-          <ContactSection />
-        </main>
+          <SimpleSpline />
+        </div>
+        <SkillsSection />
+        <ProjectsSection />
+        <ContactSection />
+      </main>
     </>
   );
 }
