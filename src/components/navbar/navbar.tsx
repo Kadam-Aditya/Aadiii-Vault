@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { AudioLines } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { useIsMobile } from "@/hooks/use-ismobile";
 
 interface NavItem {
   label: string;
@@ -17,6 +19,8 @@ const navItems: NavItem[] = [
 
 const Navbar: React.FC = () => {
   const navRef = useRef<HTMLElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleClick = (e: Event) => {
@@ -26,6 +30,9 @@ const Navbar: React.FC = () => {
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: "smooth" });
+      }
+      if (isMobile) {
+        setIsOpen(false); // Close navbar on link click for mobile
       }
     };
 
@@ -37,7 +44,7 @@ const Navbar: React.FC = () => {
         anchor.removeEventListener("click", handleClick)
       );
     };
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const sections = document.querySelectorAll("section[id]");
@@ -57,10 +64,7 @@ const Navbar: React.FC = () => {
       });
     };
 
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions
-    );
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
     sections.forEach((section) => observer.observe(section));
 
     return () => {
@@ -71,21 +75,45 @@ const Navbar: React.FC = () => {
   return (
     <nav
       ref={navRef}
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[320px] md:w-[450px] 
-             bg-white/30 backdrop-blur-lg rounded-full shadow-xl 
-             border-t-[2px] border-r-[2px] border-white/70 pointer-events-none"
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-white/30 backdrop-blur-lg shadow-xl 
+                 border-t-[1px] border-r-[1px] border-white/70 pointer-events-auto transition-all duration-300 
+                 ${
+                   isMobile
+                     ? isOpen
+                       ? "w-[90%] max-w-[300px] h-auto p-4"
+                       : "w-[100px] h-[45px] flex items-center justify-center"
+                     : "w-[320px] md:w-[450px] h-[45px] flex items-center justify-center"
+                 }`}
+      style={{ borderRadius: "30px" }}
+      onClick={() => isMobile && setIsOpen(!isOpen)} // Toggle only on mobile
     >
-      <div className="container mx-auto flex justify-center items-center space-x-6">
-        {navItems.map((item) => (
-          <a
-            key={item.href}
-            href={item.href}
-            className="text-[#333] px-4 py-2 text-base md:text-md font-roboto tracking-wide transition-all duration-300 rounded-full hover:scale-105 pointer-events-auto"
-          >
-            {item.label}
-          </a>
-        ))}
-      </div>
+      {isMobile && !isOpen ? (
+        <div className="w-full h-full flex items-center justify-center cursor-pointer">
+          <span className="text-[#333] text-lg font-roboto">
+            <AudioLines color="#54545B" />
+          </span>
+        </div>
+      ) : (
+        <div
+          className={`flex ${
+            isMobile
+              ? "flex-col items-center justify-center space-y-2 w-full"
+              : "flex-row items-center justify-center space-x-6 w-full"
+          }`}
+        >
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={`text-[#333] px-3 py-1 text-sm font-roboto tracking-wide transition-all duration-300 hover:scale-105 ${
+                isMobile ? "w-full text-center" : "w-auto"
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };
