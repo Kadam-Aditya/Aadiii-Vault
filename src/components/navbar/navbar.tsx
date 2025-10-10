@@ -10,6 +10,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { label: "Home", href: "#home" },
+  { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
@@ -71,14 +72,15 @@ const Navbar: React.FC = () => {
     <nav
       ref={navRef}
       className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[320px] md:w-[450px] 
-             bg-white/50 backdrop-blur-2xl p-1 rounded-full shadow-lg border border-white/30 pointer-events-none"
+             bg-white/30 backdrop-blur-lg rounded-full shadow-xl 
+             border-t-[2px] border-r-[2px] border-white/70 pointer-events-none"
     >
       <div className="container mx-auto flex justify-center items-center space-x-6">
         {navItems.map((item) => (
           <a
             key={item.href}
             href={item.href}
-            className="text-[#333] px-4 py-2 text-base md:text-lg font-roboto tracking-wide transition-all duration-300 rounded-full hover:scale-105 pointer-events-auto"
+            className="text-[#333] px-4 py-2 text-base md:text-md font-roboto tracking-wide transition-all duration-300 rounded-full hover:scale-105 pointer-events-auto"
           >
             {item.label}
           </a>

@@ -1,25 +1,28 @@
-"use client";
+'use client';
 
-import React from "react";
-import { cn } from "@/lib/utils";
-import SkillsSection from "@/components/sections/skills";
-import ProjectsSection from "@/components/sections/projects";
-import ContactSection from "@/components/sections/contact";
-import SimpleSpline from "@/components/animations/robo-animations";
+import React from 'react';
+import { cn } from '@/lib/utils';
+import Home from '@/components/sections/home';
+import SkillsSection from '@/components/sections/skills';
+import ProjectsSection from '@/components/sections/projects';
+import ContactSection from '@/components/sections/contact';
+import About from '@/components/sections/about';
 
-function MainPage() {
+const MainPage: React.FC = () => {
   return (
-    <>
-      <main className={cn("bg-slate-100 dark:bg-transparent")}>
-        <div className="top-0 z-0 fixed w-full h-screen">
-          <SimpleSpline />
-        </div>
+    <main className={cn('bg-slate-100 dark:bg-gray-900')}>
+      {/* Home Section with Spline Animation */}
+      <Home />
+
+      {/* Other Sections */}
+      <section className="relative z-10">
+        <About />
         <SkillsSection />
         <ProjectsSection />
         <ContactSection />
-      </main>
-    </>
+      </section>
+    </main>
   );
-}
+};
 
 export default MainPage;
