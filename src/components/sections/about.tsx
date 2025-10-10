@@ -4,8 +4,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils'; // Assuming you have a cn utility
+import { motion } from 'framer-motion'; // Removed AnimatePresence
+import { cn } from '@/lib/utils';
 import { ArrowRight } from 'lucide-react';
 
 // Types
@@ -196,7 +196,7 @@ const SkeletonFive: React.FC = () => {
           className={cn("rounded-full h-10 w-10 object-cover")}
         />
         <p className={cn("text-xs text-neutral-600 dark:text-neutral-400 flex-1")}>
-          I've worked on some pretty cool projects! It's been an awesome journey.
+          I&apos;ve worked on some pretty cool projects! It&apos;s been an awesome journey.
         </p>
       </motion.div>
       
@@ -208,7 +208,7 @@ const SkeletonFive: React.FC = () => {
         whileHover={{ scale: 1.02 }}
       >
         <p className={cn("text-xs text-neutral-600 dark:text-neutral-400")}>
-          Like getting coffee? That's impressive!
+          Like getting coffee? That&apos;s impressive!
         </p>
         <div className={cn(
           "h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0 relative"
@@ -283,12 +283,10 @@ const BentoGridItem: React.FC<BentoGridItemProps> = ({
 
 // Main About Component
 const About: React.FC<AboutProps> = ({ scrollToRoutes }) => {
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-
   const items: CardItem[] = [
     {
       title: "About Me",
-      description: "Discover aditya's personality, and his journey in tech innovation.",
+      description: "Discover Aditya&apos;s personality, and his journey in tech innovation.",
       header: <SkeletonOne />,
       className: "lg:col-span-1",
       link: "/about",
@@ -308,14 +306,14 @@ const About: React.FC<AboutProps> = ({ scrollToRoutes }) => {
       link: "/cesiveroo",
     },
     {
-      title: "Aditya's Portfolio",
+      title: "Aditya&apos;s Portfolio",
       description: "Discover how I coded my portfolio from scratch and the tools I used.",
       header: <SkeletonFour />,
       className: "lg:col-span-2",
       link: "/portfolio",
     },
     {
-      title: "Aditya's Resume",
+      title: "Aditya&apos;s Resume",
       description: "Explore my journey",
       header: <SkeletonFive />,
       className: "md:col-span-2 lg:col-span-1",
@@ -343,7 +341,7 @@ const About: React.FC<AboutProps> = ({ scrollToRoutes }) => {
             Welcome to my portfolio
           </h1>
           <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-          Discover the portfolio of Aditya, a AI enthusiast solving real life problems in DevOps and Development.
+            Discover the portfolio of Aditya, a AI enthusiast solving real life problems in DevOps and Development.
           </p>
         </div>
       </motion.div>
@@ -369,7 +367,6 @@ const About: React.FC<AboutProps> = ({ scrollToRoutes }) => {
           ))}
         </div>
       </motion.div>
-
     </div>
   );
 };
