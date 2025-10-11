@@ -6,7 +6,7 @@ import { AudioLines } from "lucide-react";
 const AudioCard = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioSrc = "/assets/THE WEEKND.mp3"; // Ensure this path is correct relative to public folder
-  const imageSrc = "/assets/AadiiiSpotify.jpeg"; // Replace with your image path
+  const imageSrc = "/assets/MobileSpotify.jpeg"; // Replace with your image path
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handleToggle = () => {
