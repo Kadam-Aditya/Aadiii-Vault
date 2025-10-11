@@ -22,7 +22,7 @@ export default function SimpleSpline() {
   };
 
   const splineStyle = isMobile
-    ? { background: "transparent", marginTop: "-150px" }
+    ? { background: "transparent", marginTop: "-180px" }
     : { background: "transparent" };
 
   return (

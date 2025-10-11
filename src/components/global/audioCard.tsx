@@ -23,7 +23,7 @@ const AudioCard = () => {
 
   return (
     <div
-      className="absolute bottom-80 left-1/2 -translate-x-1/2 w-[90%] max-w-[350px] bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl shadow-2xl p-4 flex items-center justify-between transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)]"
+      className="absolute bottom-75 left-1/2 -translate-x-1/2 w-[90%] max-w-[350px] bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl shadow-2xl p-4 flex items-center justify-between transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)]"
     >
       <div className="flex items-center gap-4">
         <div className="relative flex items-center gap-2">
