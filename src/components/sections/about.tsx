@@ -14,7 +14,6 @@ const SKELETON_FIVE_STYLES = 'flex flex-1 w-full h-full min-h-[26rem] rounded-lg
 const TOP_BG_STYLES = 'bg-no-repeat bg-contain'; // Background styles for top skeletons
 const BOTTOM_BG_STYLES = 'bg-no-repeat bg-cover'; // Background styles for bottom skeletons
 const DARK_BG = 'dark:bg-[url("/dots-pattern-dark.svg")]';
-const LIGHT_BG = 'bg-[url("/dots-pattern-light.svg")]';
 const MOTION_VARIANTS = {
   initial: { opacity: 0, scale: 0.95 },
   animate: { opacity: 1, scale: 1 },
@@ -61,7 +60,7 @@ const SkeletonOne = memo(() => (
     initial="initial"
     animate="animate"
     whileHover="hover"
-    className={cn(TOP_CARD_STYLES, DARK_BG, LIGHT_BG, TOP_BG_STYLES)}
+    className={cn(TOP_CARD_STYLES, DARK_BG, TOP_BG_STYLES)}
   >
     <BackgroundImage imageUrl="/assets/VE3.jpeg" overlayOpacity={0.0} />
   </motion.div>
@@ -73,9 +72,9 @@ const SkeletonTwo = memo(() => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     whileHover="hover"
-    className={cn(TOP_CARD_STYLES, DARK_BG, LIGHT_BG, TOP_BG_STYLES)}
+    className={cn(TOP_CARD_STYLES, DARK_BG, TOP_BG_STYLES)}
   >
-    <BackgroundImage imageUrl="/assets/convocatiNew.jpeg" overlayOpacity={0.2}/>
+    <BackgroundImage imageUrl="/assets/mumbai_university.jpg" overlayOpacity={0.0}/>
   </motion.div>
 ));
 
@@ -85,9 +84,9 @@ const SkeletonThree = memo(() => (
     initial="initial"
     animate="animate"
     whileHover="hover"
-    className={cn(TOP_CARD_STYLES, DARK_BG, LIGHT_BG, TOP_BG_STYLES)}
+    className={cn(TOP_CARD_STYLES, DARK_BG, TOP_BG_STYLES)}
   >
-    <BackgroundImage imageUrl="/assets/convocationw.jpeg" overlayOpacity={0.2}/>
+    <BackgroundImage imageUrl="/assets/ImgifAi.png" overlayOpacity={0.0}/>
   </motion.div>
 ));
 
@@ -95,21 +94,21 @@ const SkeletonFour = memo(() => {
   const techItems = [
     {
       name: "Spline",
-      icon: "/icons/spline.png",
+      icon: "/assets/ss.jpg",
       tag: "3D",
       color: "red",
       category: "3D Modeling"
     },
     {
       name: "JavaScript",
-      icon: "/icons/javascript.png",
+      icon: "/assets/ss.jpg",
       tag: "Interactions",
       color: "green",
       category: "Programming"
     },
     {
       name: "React JS",
-      icon: "/icons/react.png",
+      icon: "/assets/ss.jpg",
       tag: "Library",
       color: "orange",
       category: "Framework"
@@ -121,7 +120,7 @@ const SkeletonFour = memo(() => {
       initial={{ opacity: 0 }}
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3 }}
-      className={cn(BOTTOM_CARD_STYLES, DARK_BG, LIGHT_BG, BOTTOM_BG_STYLES, 'flex-row space-x-2 p-2')}
+      className={cn(BOTTOM_CARD_STYLES, DARK_BG, BOTTOM_BG_STYLES, 'flex-row space-x-2 p-2')}
     >
       {techItems.map((item, index) => (
         <motion.div
@@ -163,7 +162,7 @@ const SkeletonFive = memo(() => (
     initial="initial"
     animate="animate"
     whileHover="hover"
-    className={cn(SKELETON_FIVE_STYLES, DARK_BG, LIGHT_BG, BOTTOM_BG_STYLES)}
+    className={cn(SKELETON_FIVE_STYLES, DARK_BG, BOTTOM_BG_STYLES)}
   >
     <BackgroundImage imageUrl="/assets/aadiiiSpotify.jpeg" overlayOpacity={0.0} />
   </motion.div>
@@ -227,7 +226,7 @@ const About: React.FC<AboutProps> = ({ scrollToRoutes }) => {
       link: "/about",
     },
     {
-      title: "Software engineering journey",
+      title: "University of Mumbai",
       description: "Discover my Work-Study journey as a Software Engineer at Mumbai University.",
       header: <SkeletonTwo />,
       className: "lg:col-span-1",
