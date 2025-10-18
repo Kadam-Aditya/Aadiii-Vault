@@ -64,7 +64,10 @@ const Navbar: React.FC = () => {
       });
     };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
     sections.forEach((section) => observer.observe(section));
 
     return () => {
@@ -90,7 +93,7 @@ const Navbar: React.FC = () => {
       {isMobile && !isOpen ? (
         <div className="w-full h-full flex items-center justify-center cursor-pointer">
           <span className="text-[#333] text-lg font-roboto">
-            <AudioLines color="#54545B"/>
+            <AudioLines color="#54545B" />
           </span>
         </div>
       ) : (

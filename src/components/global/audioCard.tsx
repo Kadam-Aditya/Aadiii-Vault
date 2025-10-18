@@ -1,24 +1,31 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { AudioLines } from "lucide-react";
 
 const AudioCard = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const audioSrc = "/assets/THE WEEKND.mp3"; // Ensure this path is correct relative to public folder
-  const imageSrc = "/assets/MobileSpotify.jpeg"; // Replace with your image path
+  const audioSrc = "/assets/THE WEEKND.mp3";
+  const imageSrc = "/assets/MobileSpotify.jpeg";
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handleToggle = () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        audioRef.current.currentTime = 0; // Optional: Reset to start when paused
+        setIsPlaying(false);
       } else {
         audioRef.current.play().catch((err) => {
           console.error("Audio playback error:", err);
         });
+        setIsPlaying(true);
       }
     }
+  };
+
+  // Optional: Handle when audio ends to reset play button
+  const handleAudioEnded = () => {
+    setIsPlaying(false);
   };
 
   return (
@@ -64,8 +71,9 @@ const AudioCard = () => {
       <audio
         ref={audioRef}
         src={audioSrc}
-        loop
+        loop // Remove this if you want to handle audio end
         preload="auto"
+        onEnded={handleAudioEnded} // Add this to handle audio completion
       />
     </div>
   );
