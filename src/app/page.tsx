@@ -10,7 +10,7 @@ import About from '@/components/sections/about';
 
 const MainPage: React.FC = () => {
   return (
-    <main className={cn('bg-slate-100 dark:bg-gray-900')}>
+    <main className={cn('bg-[#DFDFDF] dark:bg-gray-900')}>
       {/* Home Section with Spline Animation */}
       <Home />
 
