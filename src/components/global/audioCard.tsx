@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 
 const AudioCard = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const audioSrc = "/assets/THE WEEKND.mp3";
+  const audioSrc = "/assets/weeknd.mp3";
   const imageSrc = "/assets/MobileSpotify.jpeg";
   const [isPlaying, setIsPlaying] = useState(false);
 

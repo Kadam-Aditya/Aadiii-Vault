@@ -93,7 +93,7 @@ const SkeletonThree = memo(() => (
     whileHover="hover"
     className={cn(TOP_CARD_STYLES, DARK_BG, TOP_BG_STYLES)}
   >
-    <BackgroundImage imageUrl="/assets/ImgifAi.png" overlayOpacity={0.0} />
+    <BackgroundImage imageUrl="/assets/project1.png" overlayOpacity={0.0} />
   </motion.div>
 ));
 
@@ -179,7 +179,7 @@ const SkeletonFive = memo(() => (
     className={cn(SKELETON_FIVE_STYLES, DARK_BG, BOTTOM_BG_STYLES)}
   >
     <BackgroundImage
-      imageUrl="/assets/aadiiiSpotify.jpeg"
+      imageUrl="/assets/aadiii_spotify.jpeg"
       overlayOpacity={0.0}
     />
   </motion.div>
@@ -202,7 +202,7 @@ const BentoGridItem = memo<BentoGridItemProps>(
 
     React.useEffect(() => {
       if (title === "Playlist") {
-        audioRef.current = new Audio("/assets/THE WEEKND.mp3");
+        audioRef.current = new Audio("/assets/weeknd.mp3");
 
         const handlePlay = () => setIsPlaying(true);
         const handlePause = () => setIsPlaying(false);
