@@ -9,14 +9,15 @@ import { ArrowRight } from "lucide-react";
 
 // Constants
 const TOP_CARD_STYLES =
-  "flex flex-1 w-full h-full min-h-[16rem] rounded-lg relative overflow-hidden"; // For Skeleton 1, 2, 3
+  "flex flex-1 w-full h-full min-h-[16rem] rounded-lg relative overflow-hidden";
 const BOTTOM_CARD_STYLES =
-  "flex flex-1 w-full h-full min-h-[26rem] rounded-lg relative overflow-hidden"; // For Skeleton 4
+  "flex flex-1 w-full h-full min-h-[26rem] rounded-lg relative overflow-hidden";
 const SKELETON_FIVE_STYLES =
-  "flex flex-1 w-full h-full min-h-[26rem] rounded-lg relative overflow-hidden"; // For Skeleton 5
-const TOP_BG_STYLES = "bg-no-repeat bg-contain"; // Background styles for top skeletons
-const BOTTOM_BG_STYLES = "bg-no-repeat bg-cover"; // Background styles for bottom skeletons
+  "flex flex-1 w-full h-full min-h-[26rem] rounded-lg relative overflow-hidden";
+const TOP_BG_STYLES = "bg-no-repeat bg-contain";
+const BOTTOM_BG_STYLES = "bg-no-repeat bg-cover";
 const DARK_BG = 'dark:bg-[url("/dots-pattern-dark.svg")]';
+
 const MOTION_VARIANTS = {
   initial: { opacity: 0, scale: 0.95 },
   animate: { opacity: 1, scale: 1 },
@@ -234,13 +235,6 @@ const BentoGridItem = memo<BentoGridItemProps>(
     };
 
     const isPlaylist = title === "Playlist";
-    const Wrapper = isPlaylist ? "div" : Link;
-    const wrapperProps = isPlaylist
-      ? {
-          onClick: togglePlay,
-          className: "block h-full cursor-pointer select-none",
-        }
-      : { href: link, onClick, className: "block h-full" };
 
     return (
       <motion.div
@@ -255,18 +249,20 @@ const BentoGridItem = memo<BentoGridItemProps>(
         }}
         transition={{ duration: 0.3 }}
       >
-        <Wrapper {...wrapperProps}>
-          <div className="space-y-4">
-            <div className="relative">{header}</div>
+        {isPlaylist ? (
+          <div
+            onClick={togglePlay}
+            className="block h-full cursor-pointer select-none"
+          >
+            <div className="space-y-4">
+              <div className="relative">{header}</div>
 
-            <div className="space-y-2">
-              {/* --- Title + Button Row --- */}
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                  {title}
-                </h3>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+                    {title}
+                  </h3>
 
-                {isPlaylist && (
                   <button
                     onClick={togglePlay}
                     className={cn(
@@ -278,7 +274,6 @@ const BentoGridItem = memo<BentoGridItemProps>(
                     )}
                   >
                     {isPlaying ? (
-                      // Pause Icon
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-9 w-9 text-white"
@@ -294,7 +289,6 @@ const BentoGridItem = memo<BentoGridItemProps>(
                         />
                       </svg>
                     ) : (
-                      // Play Icon
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-8 w-8 text-white ml-0.5"
@@ -311,15 +305,30 @@ const BentoGridItem = memo<BentoGridItemProps>(
                       </svg>
                     )}
                   </button>
-                )}
+                </div>
+
+                <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                  {description}
+                </p>
               </div>
+            </div>
+          </div>
+        ) : (
+          <Link href={link} onClick={onClick} className="block h-full">
+            <div className="space-y-4">
+              <div className="relative">{header}</div>
 
-              <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                {description}
-              </p>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+                    {title}
+                  </h3>
+                </div>
 
-              {/* ❌ Remove “Learn more” for Playlist */}
-              {!isPlaylist && (
+                <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                  {description}
+                </p>
+
                 <motion.div
                   className="flex items-center text-neutral-500 dark:text-neutral-400 group-hover:text-neutral-700 dark:group-hover:text-neutral-300 transition-colors"
                   initial={{ opacity: 0, x: -10 }}
@@ -328,10 +337,10 @@ const BentoGridItem = memo<BentoGridItemProps>(
                   <span>Learn more</span>
                   <ArrowRight className="h-4 w-4 ml-1" />
                 </motion.div>
-              )}
+              </div>
             </div>
-          </div>
-        </Wrapper>
+          </Link>
+        )}
       </motion.div>
     );
   }
