@@ -4,6 +4,7 @@ import "./globals.css";
 import ElasticCursor from "@/components/cursor/cursor";
 import { config } from "@/data/config";
 import Navbar from "@/components/navbar/navbar";
+import { AudioProvider } from "@/context/AudioContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   title: config.title,
   description: config.description.long,
   icons: {
-    icon: "/assets/fevicon.png"
+    icon: "/assets/fevicon.png",
   },
 };
 
@@ -33,9 +34,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar/>
-        {children}
-        <ElasticCursor />
+        <AudioProvider>
+          <Navbar />
+          {children}
+          <ElasticCursor />
+        </AudioProvider>
       </body>
     </html>
   );

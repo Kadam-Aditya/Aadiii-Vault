@@ -3,24 +3,28 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import Home from '@/components/sections/home';
-import SkillsSection from '@/components/sections/skills';
-import ProjectsSection from '@/components/sections/projects';
 import ContactSection from '@/components/sections/contact';
 import About from '@/components/sections/about';
+import VoiceAssistant from '@/components/assistant/voiceAssistant';
 
 const MainPage: React.FC = () => {
   return (
     <main className={cn('bg-[#DFDFDF] dark:bg-gray-900')}>
-      {/* Home Section with Spline Animation */}
-      <Home />
+      <section id="home">
+        <Home />
+      </section>
 
-      {/* Other Sections */}
-      <section className="relative z-10">
+      {/* ℹ️ About Section */}
+      <section id="about" className="relative z-10">
         <About />
-        <SkillsSection />
-        <ProjectsSection />
+      </section>
+
+
+      {/* 📞 Contact Section */}
+      <section id="contact" className="relative z-10">
         <ContactSection />
       </section>
+      <VoiceAssistant/>
     </main>
   );
 };
