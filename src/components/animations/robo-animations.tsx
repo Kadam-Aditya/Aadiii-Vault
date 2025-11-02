@@ -6,7 +6,7 @@ const Spline = React.lazy(() => import("@splinetool/react-spline"));
 
 export default function SimpleSpline() {
   const [error, setError] = useState<string | null>(null);
-  const scenePath = "/assets/Blob.splinecode"; // Make sure this path is correct
+  const scenePath = "/assets/adiRobo.splinecode"; // Make sure this path is correct
 
   const appRef = useRef<any>(null);
 
