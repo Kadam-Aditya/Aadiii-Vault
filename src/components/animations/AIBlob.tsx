@@ -9,19 +9,23 @@ export default function AIBlob({ size = 256 }: { size?: number }) {
   useEffect(() => {
     let audioCtx: AudioContext | null = null;
     let analyser: AnalyserNode | null = null;
-    let dataArray: Uint8Array | null = null;
+    let dataArray: Uint8Array<ArrayBuffer> | null = null;
 
     async function setupAudio() {
       try {
         audioCtx = new (window.AudioContext ||
           (window as any).webkitAudioContext)();
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
         const source = audioCtx.createMediaStreamSource(stream);
         analyser = audioCtx.createAnalyser();
         analyser.fftSize = 128;
         source.connect(analyser);
         const bufferLength = analyser.frequencyBinCount;
-        dataArray = new Uint8Array(bufferLength);
+        dataArray = new Uint8Array(
+          analyser.frequencyBinCount
+        ) as Uint8Array<ArrayBuffer>;
 
         const animate = () => {
           if (!analyser || !dataArray) return;
@@ -47,7 +51,7 @@ export default function AIBlob({ size = 256 }: { size?: number }) {
 
   // Scale movement based on blob size
   const moveSmall = size * 0.08; // roughly 8% of size
-  const moveLarge = size * 0.2;  // roughly 10% of size
+  const moveLarge = size * 0.2; // roughly 10% of size
 
   return (
     <div
