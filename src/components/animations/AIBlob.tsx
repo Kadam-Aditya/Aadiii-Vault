@@ -10,32 +10,35 @@ export default function AIBlob({ size = 256 }: { size?: number }) {
     let audioCtx: AudioContext | null = null;
     let analyser: AnalyserNode | null = null;
     let dataArray: Uint8Array<ArrayBuffer> | null = null;
+    let mounted = true; // ✅ Track if component is still mounted
 
     async function setupAudio() {
       try {
         audioCtx = new (window.AudioContext ||
           (window as any).webkitAudioContext)();
-        const stream = await navigator.mediaDevices.getUserMedia({
-          audio: true,
-        });
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        if (!mounted) return; // Stop if unmounted before microphone access
         const source = audioCtx.createMediaStreamSource(stream);
         analyser = audioCtx.createAnalyser();
         analyser.fftSize = 128;
         source.connect(analyser);
+
         const bufferLength = analyser.frequencyBinCount;
-        dataArray = new Uint8Array(
-          analyser.frequencyBinCount
-        ) as Uint8Array<ArrayBuffer>;
+        dataArray = new Uint8Array(bufferLength) as Uint8Array<ArrayBuffer>;
 
         const animate = () => {
-          if (!analyser || !dataArray) return;
+          if (!analyser || !dataArray || !mounted) return; // Stop if unmounted
           analyser.getByteFrequencyData(dataArray);
           const avg =
             dataArray.reduce((a, b) => a + b, 0) / dataArray.length / 255;
           const scale = 1 + avg * 0.6;
+
+          // ✅ Safe to start animation after mount
           controls.start({ scale });
+
           requestAnimationFrame(animate);
         };
+
         animate();
       } catch (err) {
         console.warn("Microphone permission denied:", err);
@@ -43,6 +46,11 @@ export default function AIBlob({ size = 256 }: { size?: number }) {
     }
 
     setupAudio();
+
+    return () => {
+      mounted = false; // Cleanup flag
+      audioCtx?.close(); // Stop audio context
+    };
   }, [controls]);
 
   // Common offset (for top-right positioning)
@@ -51,17 +59,11 @@ export default function AIBlob({ size = 256 }: { size?: number }) {
 
   // Scale movement based on blob size
   const moveSmall = size * 0.08; // roughly 8% of size
-  const moveLarge = size * 0.2; // roughly 10% of size
+  const moveLarge = size * 0.2;  // roughly 20% of size
 
   return (
-    <div
-      className="relative flex items-center justify-center"
-      style={{ width: size, height: size }}
-    >
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+    <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
         <filter id="goo">
           <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
           <feColorMatrix
@@ -93,7 +95,7 @@ export default function AIBlob({ size = 256 }: { size?: number }) {
           }}
         />
 
-        {/* Secondary Blob (scaled movement) */}
+        {/* Secondary Blob */}
         <motion.div
           animate={{
             x: [0, moveSmall, -moveSmall, 0],
@@ -109,7 +111,7 @@ export default function AIBlob({ size = 256 }: { size?: number }) {
           }}
         />
 
-        {/* Tertiary Blob (scaled movement) */}
+        {/* Tertiary Blob */}
         <motion.div
           animate={{
             x: [0, -moveLarge, moveLarge, 0],
