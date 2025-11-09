@@ -7,13 +7,13 @@ const ContactSection = () => {
   return (
     <section
       id="contact"
-      className="relative py-24 px-6 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-100"
+      className="relative py-24 px-6 text-white dark:text-gray-100"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold tracking-tight mb-4">Get in Touch</h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+          <p className="text-white dark:text-gray-400 max-w-xl mx-auto">
             Have a question, idea, or collaboration in mind? I'd love to hear from you.
           </p>
         </div>
@@ -24,7 +24,7 @@ const ContactSection = () => {
           <div className="space-y-8">
             <div>
               <h3 className="text-2xl font-semibold mb-4">Contact Information</h3>
-              <p className="text-gray-600 dark:text-gray-400">
+              <p className="text-white dark:text-gray-400">
                 Feel free to reach out via the form or through any of my socials below.
               </p>
             </div>
@@ -66,7 +66,7 @@ const ContactSection = () => {
           </div>
 
           {/* Right Side — Contact Form */}
-          <form className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg space-y-6">
+          <form className="bg-white text-gray-700 dark:bg-gray-900 p-8 rounded-2xl shadow-lg space-y-6">
             <div>
               <label className="block text-sm font-medium mb-2">Name</label>
               <input
