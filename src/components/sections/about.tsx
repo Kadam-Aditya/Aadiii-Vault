@@ -9,6 +9,8 @@ import EducationCard from "../about/EducationCard";
 import ProjectsCard from "../about/ProjectsCard";
 import SkillsCard from "../about/SkillsCard";
 import PlaylistCard from "../about/PlaylistCard";
+import BlogsCard from "../about/BlogsCard";
+import ExperienceCard from "../about/ExperienceCard";
 
 const About = () => {
   const [activeCard, setActiveCard] = useState<string | null>(null);
@@ -45,6 +47,18 @@ const About = () => {
       header: <PlaylistCard />,
       className: "md:col-span-2 lg:col-span-1",
     },
+    {
+      title: "Blogs",
+      description: "My work-study experience as a Software Engineer.",
+      header: <BlogsCard />,
+      className: "lg:col-span-1",
+    },
+    {
+      title: "Discover how I build this portfolio",
+      description: "My work-study experience as a Software Engineer.",
+      header: <ExperienceCard />,
+      className: "lg:col-span-2",
+    }
   ];
 
   useEffect(() => {
